@@ -1,8 +1,16 @@
 
 import java.awt.Color;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -22,8 +30,11 @@ public class Main extends javax.swing.JFrame {
      */
     public Main() {
         initComponents();
+        this.setVisible(0);
     }
      private Tdesk tdesk = new Tdesk(); 
+     private ArrayList<Integer> history = new ArrayList<Integer>();
+     private int whichNumberLable=0;
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -53,10 +64,40 @@ public class Main extends javax.swing.JFrame {
         jLabelSettings3 = new javax.swing.JLabel();
         jLabelSettings2 = new javax.swing.JLabel();
         jLabelSettings4 = new javax.swing.JLabel();
+        jLabelSettings5 = new javax.swing.JLabel();
+        jLabelSettings6 = new javax.swing.JLabel();
+        SettingsjToggleButton = new javax.swing.JToggleButton();
+        SettingsjToggleButton1 = new javax.swing.JToggleButton();
+        SettingsjToggleButton2 = new javax.swing.JToggleButton();
+        settingsjCheckBox = new javax.swing.JCheckBox();
+        jPanelAboutDevelopers = new javax.swing.JPanel();
+        jLabelAboutDevelopers = new javax.swing.JLabel();
+        jLabelAboutDevelopers1 = new javax.swing.JLabel();
+        jSeparatorAboutDevelopers = new javax.swing.JSeparator();
+        jSeparatorAboutDevelopers1 = new javax.swing.JSeparator();
+        jLabelAboutDevelopers2 = new javax.swing.JLabel();
+        jLabelAbautDeveloperText = new javax.swing.JLabel();
+        jLabelAbautDeveloperText1 = new javax.swing.JLabel();
+        jLabelAbautDeveloperText2 = new javax.swing.JLabel();
+        jLabelAbautDeveloperText3 = new javax.swing.JLabel();
+        jLabelAbautDeveloperText4 = new javax.swing.JLabel();
+        jPanelProfile = new javax.swing.JPanel();
+        jLabelProfileIcon = new javax.swing.JLabel();
+        jLabelProfileName = new javax.swing.JLabel();
+        jLabelProfile = new javax.swing.JLabel();
+        jLabelProfile3 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        jLabelProfile2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        jTextField2 = new javax.swing.JTextField();
+        jLabelProfile1 = new javax.swing.JLabel();
+        jButtonProfile1 = new javax.swing.JButton();
+        jButtonProfile2 = new javax.swing.JToggleButton();
+        jComboBoxLanguage = new javax.swing.JComboBox<>();
+        jLabelProfile4 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
+        jMenu1 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(700, 700));
@@ -123,9 +164,6 @@ public class Main extends javax.swing.JFrame {
         jLabel1.setBounds(330, 430, 70, 20);
 
         loginjLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/fb.png"))); // NOI18N
-        loginjLabel3.setMaximumSize(new java.awt.Dimension(50, 50));
-        loginjLabel3.setMinimumSize(new java.awt.Dimension(50, 50));
-        loginjLabel3.setPreferredSize(new java.awt.Dimension(50, 50));
         jPanelLogin.add(loginjLabel3);
         loginjLabel3.setBounds(270, 500, 50, 50);
 
@@ -145,12 +183,13 @@ public class Main extends javax.swing.JFrame {
         jPanelLogin.add(jLabel3);
         jLabel3.setBounds(350, 620, 30, 20);
 
+        jLabelImageOfLogin.setBackground(new java.awt.Color(255, 51, 255));
+        jLabelImageOfLogin.setForeground(new java.awt.Color(153, 0, 153));
         jLabelImageOfLogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/Login.jpg"))); // NOI18N
-        jLabelImageOfLogin.setMaximumSize(new java.awt.Dimension(700, 700));
-        jLabelImageOfLogin.setMinimumSize(new java.awt.Dimension(700, 700));
-        jLabelImageOfLogin.setPreferredSize(new java.awt.Dimension(700, 700));
+        jLabelImageOfLogin.setAlignmentY(0.0F);
+        jLabelImageOfLogin.setOpaque(true);
         jPanelLogin.add(jLabelImageOfLogin);
-        jLabelImageOfLogin.setBounds(0, 0, 700, 700);
+        jLabelImageOfLogin.setBounds(0, 0, 700, 720);
 
         getContentPane().add(jPanelLogin);
         jPanelLogin.setBounds(0, 0, 700, 700);
@@ -189,22 +228,195 @@ public class Main extends javax.swing.JFrame {
 
         jLabelSettings4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/settings.jpg"))); // NOI18N
         jPanelSettings.add(jLabelSettings4);
-        jLabelSettings4.setBounds(250, 60, 37, 30);
+        jLabelSettings4.setBounds(250, 60, 30, 30);
 
-        jLabel4.setBackground(new java.awt.Color(255, 0, 255));
-        jLabel4.setForeground(new java.awt.Color(204, 0, 204));
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/violet.png"))); // NOI18N
-        jPanelSettings.add(jLabel4);
-        jLabel4.setBounds(0, 0, 700, 100);
+        jLabelSettings5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/tourism.png"))); // NOI18N
+        jPanelSettings.add(jLabelSettings5);
+        jLabelSettings5.setBounds(630, 0, 60, 60);
+
+        jLabelSettings6.setBackground(new java.awt.Color(255, 0, 255));
+        jLabelSettings6.setForeground(new java.awt.Color(204, 0, 204));
+        jLabelSettings6.setOpaque(true);
+        jPanelSettings.add(jLabelSettings6);
+        jLabelSettings6.setBounds(0, 0, 700, 100);
+
+        SettingsjToggleButton.setBackground(new java.awt.Color(255, 0, 255));
+        SettingsjToggleButton.setForeground(new java.awt.Color(255, 255, 255));
+        SettingsjToggleButton.setText("Mano maršrūtai");
+        jPanelSettings.add(SettingsjToggleButton);
+        SettingsjToggleButton.setBounds(270, 310, 180, 50);
+
+        SettingsjToggleButton1.setBackground(new java.awt.Color(255, 0, 255));
+        SettingsjToggleButton1.setForeground(new java.awt.Color(255, 255, 255));
+        SettingsjToggleButton1.setText("Pakeisti vartotoja");
+        SettingsjToggleButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SettingsjToggleButton1ActionPerformed(evt);
+            }
+        });
+        jPanelSettings.add(SettingsjToggleButton1);
+        SettingsjToggleButton1.setBounds(270, 380, 180, 50);
+
+        SettingsjToggleButton2.setBackground(new java.awt.Color(255, 0, 255));
+        SettingsjToggleButton2.setForeground(new java.awt.Color(255, 255, 255));
+        SettingsjToggleButton2.setText("Apie kūrėjus");
+        SettingsjToggleButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SettingsjToggleButton2ActionPerformed(evt);
+            }
+        });
+        jPanelSettings.add(SettingsjToggleButton2);
+        SettingsjToggleButton2.setBounds(270, 450, 180, 50);
+
+        settingsjCheckBox.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        settingsjCheckBox.setText("Naktinis režimas");
+        settingsjCheckBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                settingsjCheckBoxActionPerformed(evt);
+            }
+        });
+        jPanelSettings.add(settingsjCheckBox);
+        settingsjCheckBox.setBounds(480, 220, 200, 40);
 
         getContentPane().add(jPanelSettings);
         jPanelSettings.setBounds(0, 0, 700, 700);
 
-        jMenu1.setText("File");
-        jMenuBar1.add(jMenu1);
+        jPanelAboutDevelopers.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jPanelAboutDevelopers.setMaximumSize(new java.awt.Dimension(700, 700));
+        jPanelAboutDevelopers.setMinimumSize(new java.awt.Dimension(700, 700));
+        jPanelAboutDevelopers.setPreferredSize(new java.awt.Dimension(700, 700));
+        jPanelAboutDevelopers.setLayout(null);
+        jPanelAboutDevelopers.add(jLabelAboutDevelopers);
+        jLabelAboutDevelopers.setBounds(0, 0, 700, 283);
+        jPanelAboutDevelopers.add(jLabelAboutDevelopers1);
+        jLabelAboutDevelopers1.setBounds(0, 430, 700, 272);
+        jPanelAboutDevelopers.add(jSeparatorAboutDevelopers);
+        jSeparatorAboutDevelopers.setBounds(240, 294, 160, 10);
+        jPanelAboutDevelopers.add(jSeparatorAboutDevelopers1);
+        jSeparatorAboutDevelopers1.setBounds(280, 400, 80, 10);
 
-        jMenu2.setText("Edit");
+        jLabelAboutDevelopers2.setFont(new java.awt.Font("Tahoma", 3, 14)); // NOI18N
+        jLabelAboutDevelopers2.setText("VGTU 2020");
+        jPanelAboutDevelopers.add(jLabelAboutDevelopers2);
+        jLabelAboutDevelopers2.setBounds(280, 400, 80, 17);
+
+        jLabelAbautDeveloperText.setText("Raimond Šilobrit - Projekto vadovas");
+        jPanelAboutDevelopers.add(jLabelAbautDeveloperText);
+        jLabelAbautDeveloperText.setBounds(240, 300, 170, 13);
+
+        jLabelAbautDeveloperText1.setText("  Edmundas Valuckas - Dizaineris");
+        jPanelAboutDevelopers.add(jLabelAbautDeveloperText1);
+        jLabelAbautDeveloperText1.setBounds(250, 320, 162, 13);
+
+        jLabelAbautDeveloperText2.setText(" Pavel Trostianko - Projektuotojas");
+        jPanelAboutDevelopers.add(jLabelAbautDeveloperText2);
+        jLabelAbautDeveloperText2.setBounds(250, 340, 162, 13);
+
+        jLabelAbautDeveloperText3.setText("Danielius Jakimovičius - Testuotojas");
+        jPanelAboutDevelopers.add(jLabelAbautDeveloperText3);
+        jLabelAbautDeveloperText3.setBounds(242, 380, 170, 13);
+
+        jLabelAbautDeveloperText4.setText("    Aldas Mačernis - Analitikas");
+        jPanelAboutDevelopers.add(jLabelAbautDeveloperText4);
+        jLabelAbautDeveloperText4.setBounds(250, 360, 162, 13);
+
+        getContentPane().add(jPanelAboutDevelopers);
+        jPanelAboutDevelopers.setBounds(0, 0, 700, 700);
+
+        jPanelProfile.setMaximumSize(new java.awt.Dimension(700, 700));
+        jPanelProfile.setMinimumSize(new java.awt.Dimension(700, 700));
+        jPanelProfile.setPreferredSize(new java.awt.Dimension(700, 700));
+        jPanelProfile.setLayout(null);
+
+        jLabelProfileIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/profel.jpg"))); // NOI18N
+        jLabelProfileIcon.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabelProfileIconMouseClicked(evt);
+            }
+        });
+        jPanelProfile.add(jLabelProfileIcon);
+        jLabelProfileIcon.setBounds(20, 20, 160, 140);
+
+        jLabelProfileName.setFont(new java.awt.Font("Tahoma", 1, 10)); // NOI18N
+        jLabelProfileName.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelProfileName.setText("Raimond Šilobrit");
+        jPanelProfile.add(jLabelProfileName);
+        jLabelProfileName.setBounds(210, 80, 480, 13);
+
+        jLabelProfile.setBackground(new java.awt.Color(102, 102, 102));
+        jLabelProfile.setOpaque(true);
+        jPanelProfile.add(jLabelProfile);
+        jLabelProfile.setBounds(0, 0, 700, 180);
+
+        jLabelProfile3.setText("Vardas:");
+        jPanelProfile.add(jLabelProfile3);
+        jLabelProfile3.setBounds(140, 200, 50, 30);
+
+        jTextField1.setText("Raimond");
+        jPanelProfile.add(jTextField1);
+        jTextField1.setBounds(190, 199, 390, 30);
+
+        jLabelProfile2.setBackground(new java.awt.Color(153, 153, 153));
+        jLabelProfile2.setOpaque(true);
+        jPanelProfile.add(jLabelProfile2);
+        jLabelProfile2.setBounds(0, 190, 700, 50);
+
+        jLabel4.setText("Pavarde:");
+        jPanelProfile.add(jLabel4);
+        jLabel4.setBounds(140, 260, 50, 30);
+
+        jTextField2.setText("Šilobrit");
+        jPanelProfile.add(jTextField2);
+        jTextField2.setBounds(190, 260, 390, 30);
+
+        jLabelProfile1.setBackground(new java.awt.Color(153, 153, 153));
+        jLabelProfile1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelProfile1.setOpaque(true);
+        jPanelProfile.add(jLabelProfile1);
+        jLabelProfile1.setBounds(0, 250, 700, 60);
+
+        jButtonProfile1.setBackground(new java.awt.Color(153, 153, 153));
+        jButtonProfile1.setText("Draugai 02");
+        jButtonProfile1.setSelected(true);
+        jPanelProfile.add(jButtonProfile1);
+        jButtonProfile1.setBounds(0, 380, 700, 50);
+
+        jButtonProfile2.setBackground(new java.awt.Color(204, 0, 204));
+        jButtonProfile2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/plain.png"))); // NOI18N
+        jButtonProfile2.setText("Prideti Maršrūta");
+        jButtonProfile2.setOpaque(true);
+        jPanelProfile.add(jButtonProfile2);
+        jButtonProfile2.setBounds(30, 450, 640, 160);
+
+        jComboBoxLanguage.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Русский", "Deutsch", "English", "Lietuvių", "Polski", "Italiano", "Espanol" }));
+        jPanelProfile.add(jComboBoxLanguage);
+        jComboBoxLanguage.setBounds(300, 320, 90, 50);
+
+        jLabelProfile4.setText("Keisti Kalba");
+        jPanelProfile.add(jLabelProfile4);
+        jLabelProfile4.setBounds(220, 320, 90, 50);
+
+        getContentPane().add(jPanelProfile);
+        jPanelProfile.setBounds(0, 0, 700, 700);
+
+        jMenuBar1.setBackground(new java.awt.Color(204, 0, 204));
+        jMenuBar1.setForeground(new java.awt.Color(153, 0, 153));
+
+        jMenu2.setText("<");
+        jMenu2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu2MouseClicked(evt);
+            }
+        });
         jMenuBar1.add(jMenu2);
+
+        jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/luggage.png"))); // NOI18N
+        jMenu1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu1MouseClicked(evt);
+            }
+        });
+        jMenuBar1.add(jMenu1);
 
         setJMenuBar(jMenuBar1);
 
@@ -235,6 +447,44 @@ public class Main extends javax.swing.JFrame {
              try{  this.setBrightness(this.jSlider1.getValue());} 
               catch(IOException ex){}
     }//GEN-LAST:event_jSlider1MouseReleased
+
+    private void SettingsjToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SettingsjToggleButton1ActionPerformed
+             this.setVisible(0);
+    }//GEN-LAST:event_SettingsjToggleButton1ActionPerformed
+
+    private void settingsjCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_settingsjCheckBoxActionPerformed
+        
+    }//GEN-LAST:event_settingsjCheckBoxActionPerformed
+
+    private void SettingsjToggleButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SettingsjToggleButton2ActionPerformed
+        this.setVisible(2);
+    }//GEN-LAST:event_SettingsjToggleButton2ActionPerformed
+
+    private void jMenu2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu2MouseClicked
+       this.whichNumberLable--;
+       this.back();
+    }//GEN-LAST:event_jMenu2MouseClicked
+
+    private void jMenu1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu1MouseClicked
+        this.setVisible(3);
+    }//GEN-LAST:event_jMenu1MouseClicked
+
+    private void jLabelProfileIconMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelProfileIconMouseClicked
+        try {
+            JFileChooser openFileCgooser;
+            openFileCgooser = new JFileChooser();
+            openFileCgooser.setCurrentDirectory(new File(System.getProperty("user.home")+"\\Desktop"));
+            openFileCgooser.setFileFilter(new FileNameExtensionFilter("png file", "png"));
+
+            if(openFileCgooser.showOpenDialog(this)==JFileChooser.APPROVE_OPTION)
+            if(this.tdesk.isImage(openFileCgooser.getSelectedFile()))
+            this.jLabelProfileIcon.setIcon(this.tdesk.Resizeimg(ImageIO.read(openFileCgooser.getSelectedFile()), this.jLabelProfileIcon.getWidth(), this.jLabelProfileIcon.getHeight()));
+            else
+            JOptionPane.showMessageDialog(this, "not select file", "MADE by R.Š.", 0);
+        } catch (IOException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jLabelProfileIconMouseClicked
 
     /**
      * @param args the command line arguments
@@ -272,23 +522,52 @@ public class Main extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JToggleButton SettingsjToggleButton;
+    private javax.swing.JToggleButton SettingsjToggleButton1;
+    private javax.swing.JToggleButton SettingsjToggleButton2;
+    private javax.swing.JButton jButtonProfile1;
+    private javax.swing.JToggleButton jButtonProfile2;
+    private javax.swing.JComboBox<String> jComboBoxLanguage;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabelAbautDeveloperText;
+    private javax.swing.JLabel jLabelAbautDeveloperText1;
+    private javax.swing.JLabel jLabelAbautDeveloperText2;
+    private javax.swing.JLabel jLabelAbautDeveloperText3;
+    private javax.swing.JLabel jLabelAbautDeveloperText4;
+    private javax.swing.JLabel jLabelAboutDevelopers;
+    private javax.swing.JLabel jLabelAboutDevelopers1;
+    private javax.swing.JLabel jLabelAboutDevelopers2;
     private javax.swing.JLabel jLabelImageOfLogin;
+    private javax.swing.JLabel jLabelProfile;
+    private javax.swing.JLabel jLabelProfile1;
+    private javax.swing.JLabel jLabelProfile2;
+    private javax.swing.JLabel jLabelProfile3;
+    private javax.swing.JLabel jLabelProfile4;
+    private javax.swing.JLabel jLabelProfileIcon;
+    private javax.swing.JLabel jLabelProfileName;
     private javax.swing.JLabel jLabelSettings;
     private javax.swing.JLabel jLabelSettings1;
     private javax.swing.JLabel jLabelSettings2;
     private javax.swing.JLabel jLabelSettings3;
     private javax.swing.JLabel jLabelSettings4;
+    private javax.swing.JLabel jLabelSettings5;
+    private javax.swing.JLabel jLabelSettings6;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JPanel jPanelAboutDevelopers;
     private javax.swing.JPanel jPanelLogin;
+    private javax.swing.JPanel jPanelProfile;
     private javax.swing.JPanel jPanelSettings;
     private javax.swing.JPasswordField jPasswordFieldLogin;
+    private javax.swing.JSeparator jSeparatorAboutDevelopers;
+    private javax.swing.JSeparator jSeparatorAboutDevelopers1;
     private javax.swing.JSlider jSlider1;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextFieldLoginEmail;
     private javax.swing.JToggleButton jToggleButtonLogin;
     private javax.swing.JLabel loginjLabel1;
@@ -296,6 +575,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel loginjLabel3;
     private javax.swing.JLabel loginjLabel4;
     private javax.swing.JLabel loginjLabel5;
+    private javax.swing.JCheckBox settingsjCheckBox;
     // End of variables declaration//GEN-END:variables
    
     private static boolean isValidEmail(String emailAddress) {
@@ -303,13 +583,49 @@ public class Main extends javax.swing.JFrame {
    }
    
     private void  setVisible(int i){
+       
+        if(this.history.isEmpty()){
+            
+        }else if( this.history.get(this.whichNumberLable-1)==i)
+            return;
+        
+        this.history.add(i);
+        this.whichNumberLable++;
         
         this.jPanelLogin.setVisible(false);
         this.jPanelSettings.setVisible(false);
+        this.jPanelAboutDevelopers.setVisible(false);
+        this.jPanelProfile.setVisible(false);
+        
         if(i==0)
-              this.jLabelImageOfLogin.setVisible(true);
+           this.jPanelLogin.setVisible(true);
         if(i==1)
            this.jPanelSettings.setVisible(true);
+        if(i==2)
+           this.jPanelAboutDevelopers.setVisible(true);
+         if(i==3)
+           this.jPanelProfile.setVisible(true);
+    }
+    
+    private void  back(){
+        if(this.whichNumberLable<0){
+            this.whichNumberLable=0;
+            return;
+        }
+        int i=this.history.get(this.whichNumberLable);
+        this.history.remove(this.whichNumberLable);
+        this.jPanelLogin.setVisible(false);
+        this.jPanelSettings.setVisible(false);
+        this.jPanelAboutDevelopers.setVisible(false);
+        this.jPanelProfile.setVisible(false);
+        if(i==0)
+           this.jPanelLogin.setVisible(true);
+        if(i==1)
+           this.jPanelSettings.setVisible(true);
+        if(i==2)
+           this.jPanelAboutDevelopers.setVisible(true);
+        if(i==3)
+           this.jPanelProfile.setVisible(true);
     }
     
      private static void setBrightness(int brightness)
@@ -343,4 +659,6 @@ public class Main extends javax.swing.JFrame {
         stderr.close();
 
     }
+     
+    
 }
