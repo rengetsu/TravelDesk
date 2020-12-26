@@ -15,3 +15,7 @@ Application created as university project in Vilnius Gediminas technical univers
  ```
  git clone https://github.com/rengetsu/TravelDesk.git
  ```
+ 
+ ### Preview Screenshot
+
+![GitHub Logo](https://i.ibb.co/7CHq0RB/23.png)
